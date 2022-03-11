@@ -16,6 +16,80 @@ This package provides a grid that adapts itself according to the available size.
 
 ![Grid example](https://user-images.githubusercontent.com/58062436/157809067-a9bfbab4-63a8-4456-b862-3925479b8da2.gif)
 
+Code:
+
+```dart
+class GridTest extends StatefulWidget {
+  const GridTest({Key? key}) : super(key: key);
+
+  @override
+  State<GridTest> createState() => _GridTestState();
+}
+
+class _GridTestState extends State<GridTest> {
+  final List<int> integers = List.generate(10, (index) => index);
+
+  Axis direction = Axis.vertical;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text("Example")),
+      body: Center(
+        child: AdaptativeGrid.builder(
+          mainAxisDirection: direction,
+          scrollController: ScrollController(),
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 10,
+          // backgroudColor: Colors.amber,
+          // reversedCrossAxisChildren: true,
+          // gridLayout: const [[1, 2], [2, 1]],
+          // margin: const EdgeInsets.all(3),
+          // maxLength: 5,
+          // crossAxisLength: 3,
+          // crossAxisThickness: 100,
+          // fillLastCrossAxis: true,
+          // flexMainAxis: const [3, 1, 2],
+          // maxNumberOfCrossAxis: 2,
+          // thicknessOfEachMainAxis: const [100, 200],
+          // thicknessOfEachCrossAxis: const [50, 100, 100],
+          // expandLastMainAxis: true,
+          itemCount: 10,
+          itemBuilder: (context, i) => card(i),
+          childrenPerCrossAxisAccordingToSize: direction == Axis.vertical
+              ? const [400, 800, 1200, 1600]
+              : const [100, 200, 300, 400],
+        ),
+      ),
+    );
+  }
+
+  Widget card(int data) {
+    return AspectRatio(
+      aspectRatio: 3 / 1,
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            integers[data]++;
+          });
+        },
+        child: Card(
+          color: Colors.lightGreen,
+          child: Center(
+            child: Text(
+              integers[data].toString(),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+```
 
 ## Usage
 
