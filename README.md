@@ -16,7 +16,7 @@ This package provides a grid that adapts itself according to the available size.
 
 ![Grid example](https://user-images.githubusercontent.com/58062436/157809067-a9bfbab4-63a8-4456-b862-3925479b8da2.gif)
 
-Code:
+### Code:
 
 ```dart
 class GridTest extends StatefulWidget {
@@ -218,7 +218,7 @@ If it is true, the cross axis direction will be reversed.
 <img height="200px" alt="Reversed example" src="https://user-images.githubusercontent.com/58062436/157812935-c375dd58-78e6-46f7-8d43-e75eb5bd90e2.png">
 
 
-## flexMainAxis
+### flexMainAxis
 
 Expands the in main axis children according to its flex.
 
@@ -233,7 +233,7 @@ In this case, the first children column will have flex = 3; the second children 
 ![flexMainAxis example](https://user-images.githubusercontent.com/58062436/157816630-8cb3aa6b-0738-4333-838b-29ef10c06668.png)
 
 
-## gridLayout
+### gridLayout
 
 It can be used to customize the layout of each case in [childrenPerCrossAxisAccordingToSize].
 
