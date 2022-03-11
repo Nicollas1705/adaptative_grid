@@ -1,6 +1,6 @@
 # adaptative_grid
 
-This package provides a grid that adapts itself according to the available size. Also provides a way to costumize the adaptivity.
+This package provides a grid that adapts itself according to the available size. Also provides a way to customize the adaptivity.
 
 <br>
 <img WIDTH="60%" src="https://user-images.githubusercontent.com/84534787/120998591-a95c6980-c7a1-11eb-9435-7d7587f0b32b.png">
@@ -9,22 +9,24 @@ This package provides a grid that adapts itself according to the available size.
 
 # TODO README
 
-* Add example
 * Add dependency
 
 
 ## Example
 
-![Grid example](C:\Users\nicol\Desktop\Grid.gif)
+![Grid example](https://user-images.githubusercontent.com/58062436/157809067-a9bfbab4-63a8-4456-b862-3925479b8da2.gif)
 
 
 ## Usage
 
 1. Add the dependency into pubspec.yaml.
 
-```dart
+```yaml
 dependencies:
-  ...
+  adaptative_grid:
+    git:
+      url: git://github.com/Nicollas1705/adaptative_grid
+      ref: main
 ```
 
 2. Import the library:
@@ -50,17 +52,17 @@ AdaptativeGrid.builder(
 ```
 
 
-## Options
+## Some parameters options
 
 The AdaptativeGrid gives some options to customize.
 
 ### childrenPerCrossAxisAccordingToSize
 
-It is the main option (which is required) to costumize the behave. It will be used to show a children quantity according to the available size.
+It is the main option (which is required) to customize the behavior. It will be used to show a quantity of children  according to the available size.
 
 When [mainAxisDirection] is [Axis.vertical], the size will be compared with the max width. If it is [Axis.horizontal], the size will be compared with the max height.
 
-When the item [double] is compared with the size, it will represents the children quantity per cross axis.
+When the item [double] is compared with the size, it will represent the quantity of children per cross axis.
 
 Comparing if the available size is less than each item:
 1. size < childrenPerCrossAxisAccordingToSize[0] => 1 child per cross axis
@@ -70,283 +72,143 @@ Comparing if the available size is less than each item:
 
 #### Example:
 
+```dart
 childrenPerCrossAxisAccordingToSize: [400],
-
-If the available width is < 400: Show just 1 children column
-
-If the available width is >= 400: Show 2 children column
-
-
-
-
-
-
-
-          mainAxisDirection: direction,
-          scrollController: ScrollController(),
-          // backgroudColor: Colors.amber,
-          mainAxisSpacing: 20,
-          crossAxisSpacing: 10,
-          // reversedCrossAxisChildren: true,
-          // gridLayout: [[1, 2], [2, 1]],
-          // margin: const EdgeInsets.all(3),
-          // maxLength: 5,
-          // crossAxisLength: 3,
-          // crossAxisThickness: 100,
-          // fillLastCrossAxis: true,
-          // flexMainAxis: [3, 1, 2],
-          // maxNumberOfCrossAxis: 2,
-          // thicknessOfEachMainAxis: [100, 200],
-          // thicknessOfEachCrossAxis: [50, 100, 100],
-          // expandLastMainAxis: true,
-          itemCount: 10,
-          itemBuilder: (context, i) => card(i),
-          childrenPerCrossAxisAccordingToSize: direction == Axis.vertical
-              ? const [400, 800, 1200, 1600]
-              : const [400, 500, 600, 700],
-
-
-
-
-### Multiple masks (automatically updated according to the text size)
-
-```dart
-final controller = TextMaskingController(
-  masks: ["000.000.000-00", "00.000.000/0000-00"],
-);
 ```
 
-### Costumizing the filters
+If the available width is < 400: Show just 1 children column.
 
-To set a Map filter, use the key (example: "_") and the regex pattern (example: r'[01]').
-
-```dart
-final controller = TextMaskingController(
-  mask: "_ _ _ _",
-  filters: {"_": r'[01]'}, // Binary code
-);
-```
-
-### Initializing a text
-
-```dart
-final controller = TextMaskingController(
-  masks: ["(00) 00000-0000"],
-  initialText: "12345678901", // Result: (12) 34567-8901
-);
-```
-
-### Completing the mask quickly
-
-It will complete the mask as quick as possible:
-
-Mask example: "00--00".
-
-When input only 2 numbers ("12"), the result will be: "12--|" (the cursor will go to the final).
-
-Note: The cursor is represented by this character: "|" (pipe).
-
-```dart
-final controller = TextMaskingController(
-  mask: "+00 (00) 00000-0000",
-  maskAutoComplete: MaskAutoComplete.quick,
-  initialText: "1234", // Result: +12 (34) 
-);
-```
-
-
-## Methods
-
-### Update to another single mask or masks
-
-Use the "mask" parameter to update to a single mask.
-
-Use the "masks" parameter to update to a multiple masks.
-
-```dart
-controller.updateMask(mask: "000-000");
-```
-
-### Update the thext using updateText() method
-```dart
-controller.updateText("123456");
-```
-
-### Get the default filters (it is an static method)
-```dart
-Map<String, String> defaultFilters = TextMaskingController.defaultFilters;
-```
-
-### Get the current mask
-
-It will returns the mask being used by the current text.
-
-It can be null because the "mask" and "masks" parameters can be null.
-
-```dart
-String? mask = controller.currentMask;
-```
-
-### Get the clean text (without the mask)
-
-Mask example: "00-00-00".
-
-Input example: "123456" (resulting: "12-34-56").
-
-The unmasked text will be: "123456".
-
-```dart
-String text = controller.unmaskedText;
-```
-
-### Check if the current mask is properly filled
-
-Masks example: ["00-00", "0000-0000"].
-
-Input example: "1234" (resulting: "12-34"). This is filled.
-
-Input example: "123456" (resulting: "1234-56"). This is not filled.
-
-```dart
-bool filled = controller.isFilled;
-```
-
-
-## Default filters
+If the available width is >= 400: Show 2 children column.
 
 <table>
   <tr>
-    <th>Key</th>
-    <th>Regex pattern</th>
-    <th>Description</th>
+    <th>
+      Width size < 400
+    </th>
+    <th>
+      Width size >= 400
+    </th>
   </tr>
   <tr>
-    <td>0</td>
-    <td>[0-9]</td>
-    <td>Only numbers</td>
-  </tr>
-  <tr>
-    <td>A</td>
-    <td>[A-Z]</td>
-    <td>Upper case letters</td>
-  </tr>
-  <tr>
-    <td>a</td>
-    <td>[a-z]</td>
-    <td>Lower case letters</td>
-  </tr>
-  <tr>
-    <td>@</td>
-    <td>[a-zA-Z]</td>
-    <td>Any case letters</td>
-  </tr>
-  <tr>
-    <td>*</td>
-    <td>.*</td>
-    <td>Any character</td>
+    <th>
+      <img src="https://user-images.githubusercontent.com/58062436/157809494-9989fcfa-ec9c-4ae9-aa23-95d9bca8e3fb.png">
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/58062436/157810303-4a4b2158-30e5-4bfe-992b-2454c442c28d.png">
+    </th>
   </tr>
 </table>
 
 
-## Example masks
+### mainAxisDirection
+
+The axis along which the grid grows. Default: [Axis.vertical].
+
+<img height="500px" src="https://user-images.githubusercontent.com/58062436/157811235-96ae4c67-af63-48fb-ada7-362f6d37f819.gif">
+
+
+### itemBuilder and itemCount
+
+Used in [AdaptativeGrid.builder()] constructor.
+
+itemCount is the total quantity of children.
+
+itemBuilder is the children builder.
+
+
+### scrollController
+
+A [ScrollController]. Use this to return a scrollable widget. The grid will be scrollable by the [ListView] widget.
+
+
+### mainAxisSpacing and crossAxisSpacing
+
+These is to set the spacing among the children.
+
+By default, mainAxisSpacing is the vertical spacing.
+
+By default, crossAxisSpacing is the horizontal spacing.
+
+
+### maxNumberOfCrossAxis and maxLength
+
+Use [maxNumberOfCrossAxis] to set the limit of cross axes.
+
+Use [maxLength] to set the limit of children.
+
+
+### reversedCrossAxisChildren
+
+If it is true, the cross axis direction will be reversed.
+
+<img height="200px" alt="Reversed example" src="https://user-images.githubusercontent.com/58062436/157812935-c375dd58-78e6-46f7-8d43-e75eb5bd90e2.png">
+
+
+## flexMainAxis
+
+Expands the in main axis children according to its flex.
+
+Example:
 
 ```dart
-final cpfAndCnpj = TextMaskingController(
-  masks: ["000.000.000-00", "00.000.000/0000-00"],
-);
-
-final brazilianPhones = TextMaskingController(
-  masks: 
-    "+00 (00) 00000-0000",
-    "+00 (00) 0000-0000",
-    "(00) 00000-0000",
-    "(00) 0000-0000",
-    "00000-0000",
-    "0000-0000",
-  ],
-);
-
-final date = TextMaskingController(mask: "00/00/0000");
+flexMainAxis: const [3, 1, 2],
 ```
+
+In this case, the first children column will have flex = 3; the second children column will have flex = 1; the last children column will have flex = 2.
+
+![flexMainAxis example](https://user-images.githubusercontent.com/58062436/157816630-8cb3aa6b-0738-4333-838b-29ef10c06668.png)
+
+
+## gridLayout
+
+It can be used to customize the layout of each case in [childrenPerCrossAxisAccordingToSize].
+
+Note: The case is according to the quantity of children per cross axis, considering the [childrenPerCrossAxisAccordingToSize] list:
+  1. size < childrenPerCrossAxisAccordingToSize[0] => 1 child per cross axis (case 1)
+  2. size < childrenPerCrossAxisAccordingToSize[1] => 2 children per cross axis (case 2)
+  3. size < childrenPerCrossAxisAccordingToSize[2] => 3 children per cross axis (case 3)
+  4. size >= the last [double] => children per cross axis will be [childrenPerCrossAxisAccordingToSize.length] + 1  (case X)
+
+The numbers will be used to compose the number of children in each cross axis. The first number of the first list (1) indicates to the first cross axis to use only 1 child.
+
+Example:
+
+```dart
+gridLayout: const [[1, 2], [2, 1]],
+```
+
+  1. first case [1, 2]: 1° cross axis with 1 child; 2° cross axis with 2 children; the others will not be specified;
+  2. second case [2, 1]: 1° cross axis with 2 children; 2° cross axis with 1 child; the others will not be specified;
+  3. the other cases will not be specified.
+
+The lists inside the [gridLayout] can be null to skip some cases (ex: [null, [1, 2]]).
+
+<table>
+  <tr>
+    <th>
+      First case [1, 2]
+    </th>
+    <th>
+      Second case [2, 1]
+    </th>
+    <th>
+      Other cases (default)
+    </th>
+  </tr>
+  <tr>
+    <th>
+      <img src="https://user-images.githubusercontent.com/58062436/157816892-eba9418f-c1dd-4cce-aba2-c3691e2a8f39.png">
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/58062436/157817126-061a04c9-ab82-4761-9c99-20d5b70ebb11.png">
+    </th>
+    <th>
+      <img src="https://user-images.githubusercontent.com/58062436/157817274-41aacc18-4efd-4b09-b9e7-1d651c8e3bdc.png">
+    </th>
+  </tr>
+</table>
 
 
 ## Note
 
-This package was developed based on [flutter_masked_text2](https://pub.dev/packages/flutter_masked_text2) and [mask_text_input_formatter](https://pub.dev/packages/mask_text_input_formatter) packages.
-
-
-## Main differences
-
-### Can use multiple masks easily
-
-Just set the "masks" parameter to update the mask according to the text size.
-
-### This package saves the user cursor
-
-The cursor will be saved even if it changes the mask from masks parameter.
-
-Masks example: ["00-00", "000-000", "0000-0000"].
-
-Note: The cursor will be represented by this character: "|" (pipe).
-
-Result text from an input: "12-|34". If the user add some number (example: "123"), the result will be: "1212-3|34".
-
-Adding each character ("123"):
-<table>
-  <tr>
-    <th>Text</th>
-    <th>Input</th>
-    <th>Result</th>
-  </tr>
-  <tr>
-    <td>"12-|34"</td>
-    <td>"1"</td>
-    <td>"121-|34"</td>
-  </tr>
-  <tr>
-    <td>"121-|34"</td>
-    <td>"2"</td>
-    <td>"121-2|34"</td>
-  </tr>
-  <tr>
-    <td>"121-2|34"</td>
-    <td>"3"</td>
-    <td>"1212-3|34"</td>
-  </tr>
-</table>
-
-
-## TODO
-
-### [ ] Convert lower-upper case inputs
-
-Nowadays, the code doesn't convert the letter case.
-
-Example:
-
-```dart
-final controller = TextMaskingController(
-  mask: "AAA",
-);
-```
-
-If the user types "abc" (lower case), the text will not be insert. It will only be insert if the user type upper case letters.
-
-
-### [ ] Make a way to update the mask automatically based on the first digits (not only by the text size).
-
-Example:
-
-```dart
-final controller = TextMaskingController(
-  masks: ["A-00", "B-0000", "C-000000"],
-  filters: {
-    "A": r'[A]', 
-    "B": r'[B]', 
-    "C": r'[C]', 
-    "0": r'[0-9]',
-  },
-);
-```
-
-If the user starts typing "A", it will be only able to type 2 more numbers. If starts with "B", 4 more numbers. If starts with "C", 6 more numbers.
+This package was developed to be used on any platform, adapting to the window (or available) size.

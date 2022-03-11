@@ -20,37 +20,37 @@ class AdaptativeGrid extends StatelessWidget {
   /// Cross axis separator between children.
   final double crossAxisSpacing;
 
-  /// Enforce the cross axis length.
+  /// Set the cross axis length (no matter the available space).
   final int? crossAxisLength;
 
-  /// It will be used to show a children quantity according to the available size.
+  /// It will be used to show a quantity of children according to the available size.
   /// 
   /// When [mainAxisDirection] is [Axis.vertical], the size will be compared with the max width.
   /// If it is [Axis.horizontal], the size will be compared with the max height.
   /// 
-  /// When the item [double] is compared with the size, it will represents the children quantity per cross axis.
+  /// When the item [double] is compared with the size, it will represents the quantity of children per cross axis.
   /// 
   /// Comparing if the available size is less than each item:
-  /// 1. size < childrenPerCrossAxisAccordingToSize[0] => 1 child per cross axis
-  /// 2. size < childrenPerCrossAxisAccordingToSize[1] => 2 children per cross axis
-  /// 3. size < childrenPerCrossAxisAccordingToSize[2] => 3 children per cross axis
-  /// 4. size >= the last [double] => children per cross axis will be [childrenPerCrossAxisAccordingToSize.length] + 1
+  /// 1. size < childrenPerCrossAxisAccordingToSize[0] => 1 child per cross axis;
+  /// 2. size < childrenPerCrossAxisAccordingToSize[1] => 2 children per cross axis;
+  /// 3. size < childrenPerCrossAxisAccordingToSize[2] => 3 children per cross axis;
+  /// 4. size >= the last [double] => children per cross axis will be [childrenPerCrossAxisAccordingToSize.length] + 1.
   final List<double> childrenPerCrossAxisAccordingToSize;
 
   /// Expands the in main axis children acording to its flex.
   ///
   /// Ex: [1, 2] =>
-  /// 1. main axis: flex = 1
-  /// 2. main axis: flex = 2
-  /// 3. main axis: flex = 1 (null)
+  /// 1. main axis: flex = 1;
+  /// 2. main axis: flex = 2;
+  /// 3. main axis: flex = 1 (null).
   final List<int?>? flexMainAxis;
 
   /// The thickness of each main axis.
   ///
   /// Ex: [100, 200] =>
-  /// 1. main axis: thickness = 100
-  /// 2. main axis: thickness = 200
-  /// 3. main axis: thickness = the thickness to fill the cross axis (null)
+  /// 1. main axis: thickness = 100;
+  /// 2. main axis: thickness = 200;
+  /// 3. main axis: thickness = the thickness to fill the cross axis (null).
   ///
   /// It can be used with [expandLastMainAxis] to a better layout.
   ///
@@ -61,9 +61,9 @@ class AdaptativeGrid extends StatelessWidget {
   /// The thickness of each cross axis.
   ///
   /// Ex: [100, 50] =>
-  /// 1. cross axis: thickness = 100
-  /// 2. cross axis: thickness = 50
-  /// 3. cross axis: thickness = its children size (null)
+  /// 1. cross axis: thickness = 100;
+  /// 2. cross axis: thickness = 50;
+  /// 3. cross axis: thickness = its children size (null).
   final List<double?>? thicknessOfEachCrossAxis;
 
   /// It can be used to costumize the layout of each case in [childrenPerCrossAxisAccordingToSize].
@@ -75,9 +75,9 @@ class AdaptativeGrid extends StatelessWidget {
   /// first list (1) indicates to the first cross axis to use only 1 child.
   ///
   /// Ex: [[1, 2], [2, 1]] =>
-  /// 1. first case [1, 2]: 1° cross axis with 1 child; 2° cross axis with 2 children; the others will not be specified
-  /// 2. second case [2, 1]: 1° cross axis with 2 children; 2° cross axis with 1 child; the others will not be specified
-  /// 3. the other cases will not be specified
+  /// 1. first case [1, 2]: 1° cross axis with 1 child; 2° cross axis with 2 children; the others will not be specified;
+  /// 2. second case [2, 1]: 1° cross axis with 2 children; 2° cross axis with 1 child; the others will not be specified;
+  /// 3. the other cases will not be specified.
   ///
   /// The lists inside the [gridLayout] can be null to skip some case (ex: [null, [1, 2]]).
   final List<List<int?>?>? gridLayout;
@@ -106,7 +106,7 @@ class AdaptativeGrid extends StatelessWidget {
   /// If true, the children will begin from right to left of the cross axis.
   /// 
   /// Ex:
-  /// 2. true (from right to left): ... [3] [2] [1]
+  /// 2. true (from right to left): ... [3] [2] [1];
   /// 1. false (from left to right): [1] [2] [3] ...
   final bool reversedCrossAxisChildren;
 
