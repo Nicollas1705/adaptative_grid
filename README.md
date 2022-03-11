@@ -97,7 +97,7 @@ dependencies:
   adaptative_grid:
     git:
       url: git://github.com/Nicollas1705/adaptative_grid
-      ref: main
+      ref: master
 ```
 
 2. Import the library:
