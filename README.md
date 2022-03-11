@@ -7,10 +7,6 @@ This package provides a grid that adapts itself according to the available size.
 <br>
 <br>
 
-# TODO README
-
-* Add dependency
-
 
 ## Example
 
@@ -90,6 +86,7 @@ class _GridTestState extends State<GridTest> {
   }
 }
 ```
+
 
 ## Usage
 
