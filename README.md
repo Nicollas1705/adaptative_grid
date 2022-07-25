@@ -96,7 +96,7 @@ class _GridTestState extends State<GridTest> {
 dependencies:
   adaptative_grid:
     git:
-      url: git://github.com/Nicollas1705/adaptative_grid
+      url: https://github.com/Nicollas1705/adaptative_grid
       ref: master
 ```
 
